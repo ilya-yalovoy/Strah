@@ -1,9 +1,7 @@
 /*Все блоки нужно искать в CALC*/
 
-
-
 var xhr = new XMLHttpRequest();
-var url = 'https://nationalbank.kz/rss/rates_all.xml';
+var url = 'https://nationalbank.kz/rss_news_kazakh.xml'
 
 xhr.open(
   'GET',
