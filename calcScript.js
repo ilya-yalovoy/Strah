@@ -1,25 +1,13 @@
 /*Все блоки нужно искать в CALC*/
 
-var today = new Date();
-function formatDate(date) {
 
-  var dd = date.getDate();
-  if (dd < 10) dd = '0' + dd;
 
-  var mm = date.getMonth() + 1;
-  if (mm < 10) mm = '0' + mm;
-
-  var yy = date.getFullYear() % 100;
-  if (yy < 10) yy = '0' + yy;
-
-  return dd + '-' + mm + '-' + yy;
-}
-var today= formatDate(new Date());
 var xhr = new XMLHttpRequest();
+var url = 'https://nationalbank.kz/rss/rates_all.xml';
 
 xhr.open(
   'GET',
-  `https://nationalbank.kz/rss/get_rates.cfm?fdate=${today}`,
+  url,
   true
 )
 xhr.send()
