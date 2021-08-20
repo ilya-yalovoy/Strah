@@ -1,26 +1,5 @@
 /*Все блоки нужно искать в CALC*/
 
-var xhr = new XMLHttpRequest();
-var url = 'https://nationalbank.kz/rss_news_kazakh.xml'
-
-xhr.open(
-  'GET',
-  url,
-  true
-)
-xhr.send()
-
-xhr.onreadystatechange = function() {
-  if (xhr.readyState != 4) {
-    return
-  }
-
-  if (xhr.status === 200) {
-    console.log('result', xhr.responseText.parseFromString(text,"text/xml"))
-  } else {
-    console.log('err', xhr.responseText)
-  }
-}
 
 const startDate = document.querySelectorAll('input[type="date"]')[0];
 const finishDate = document.querySelectorAll('input[type="date"]')[1];
@@ -28,7 +7,8 @@ startDate.min = formatDateMin(new Date());
 startDate.value = formatDateMin(new Date());
 finishDate.value = formatDateValue(new Date());
 
-
+var EUR = 499.5,
+    USD = 427.09
 
 function formatDateMin(date) {
 
@@ -784,7 +764,7 @@ function plusTurist() {
   a.classList.add('insurance-calculator-person');
   a.innerHTML = `
   <select  onchange="CalcTravel()" name="years">
-                          <option value="1,8">От 0 до 3 лет</option>
+                          <option value="1.8">От 0 до 3 лет</option>
                           <option value="1">От 3 до 65 лет</option>
                           <option value="3" selected="selected">От 65 до 75 лет</option>
                           <option value="6">старше 75 лет</option>
@@ -1008,6 +988,14 @@ function returnPrice() {
     if (turist >=51 && turist <= 100) {
       objMainData.price = objMainData.price * 0.8;
     }
+
+
+    if (objMainData.Exception == 'Europ') {
+      objMainData.price = objMainData.price * EUR;
+    } else {
+      objMainData.price = objMainData.price * USD;
+    }
+
     document.querySelector('#mainPrice').innerHTML = `<span>Итого:</span> <span  class="green"> ${objMainData.price.toFixed(2)} KZT</span>`
   } else {
     document.querySelector('#mainPrice').classList.add('noVisible');
