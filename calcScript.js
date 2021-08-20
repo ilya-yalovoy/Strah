@@ -1,6 +1,6 @@
 /*Все блоки нужно искать в CALC*/
 
-/*var today = new Date();
+var today = new Date();
 function formatDate(date) {
 
   var dd = date.getDate();
@@ -12,10 +12,10 @@ function formatDate(date) {
   var yy = date.getFullYear() % 100;
   if (yy < 10) yy = '0' + yy;
 
-  return dd + '.' + mm + '.' + yy;
+  return dd + '-' + mm + '-' + yy;
 }
-today= formatDate(today)
-var xhr = new XMLHttpRequest()
+var today= formatDate(new Date());
+var xhr = new XMLHttpRequest();
 
 xhr.open(
   'GET',
@@ -34,7 +34,7 @@ xhr.onreadystatechange = function() {
   } else {
     console.log('err', xhr.responseText)
   }
-}*/
+}
 
 const startDate = document.querySelectorAll('input[type="date"]')[0];
 const finishDate = document.querySelectorAll('input[type="date"]')[1];
@@ -365,6 +365,7 @@ MultyTravelBlock.addEventListener('click', CalcTravel)
 
 CalcTravel();
 function CalcTravel() {
+  
     if (!MultyTravelCheck.checked) {
         MultyTravelBlockTime.classList.remove('noVisible');
         MultyTravelBlock.classList.add('noVisible'); 
@@ -416,6 +417,8 @@ function CalcTravel() {
             MultyTravelBlock.querySelectorAll('label')[7].style.display = 'none';
             MultyTravelBlock.querySelectorAll('label')[8].style.display = 'none';
             MultyTravelBlock.querySelectorAll('label')[9].style.display = 'none';
+
+            countryGroup();
         }
     }
     if (objMainData.Exception === undefined) {
@@ -439,7 +442,7 @@ function CalcTravel() {
         sportType.classList.add('noVisible');
         sportBonus.classList.add('noVisible');
     }
-    returnPrice();
+    
 }
 
 /*
@@ -463,7 +466,7 @@ function travelCountryExceptions(country, arrCountryExceptions) {
 }
 
 function countryEurop () {
-
+  objMainData.price = 0;
     if (objMainData.MultiTravel) {
         var time = MultyTravelBlock.querySelectorAll('input');
         switch (true) {
@@ -525,7 +528,7 @@ function countryEurop () {
 }
 
 function countryEarch () {
-
+  objMainData.price = 0;
   if (objMainData.MultiTravel) {
       var time = MultyTravelBlock.querySelectorAll('input');
         if (arrCheckedSum[0].checked) {
@@ -620,6 +623,7 @@ function countryEarch () {
 }
 
 function counrtyTailand() {
+  objMainData.price = 0;
       if (objMainData.MultiTravel) {
         var time = MultyTravelBlock.querySelectorAll('input');
         switch (true) {
@@ -668,6 +672,7 @@ function counrtyTailand() {
 }
 
 function countryGroup() {
+  objMainData.price = 0;
   if (objMainData.MultiTravel) {
     var time = MultyTravelBlock.querySelectorAll('input');
       if (document.getElementsByName('price')[0].checked) {
@@ -740,47 +745,47 @@ function countryGroup() {
       }
     }
   else {
-  var date = document.querySelectorAll('input[type="date"]');
-  var start = new Date(date[0].value);
-  var finish= new Date(date[1].value);
+    var date = document.querySelectorAll('input[type="date"]');
+    var start = new Date(date[0].value);
+    var finish= new Date(date[1].value);
 
-  time = (finish.getTime() - start.getTime())/1000/60/60/24;
+    time = (finish.getTime() - start.getTime())/1000/60/60/24;
 
-  if (document.getElementsByName('price')[0].checked) {
-    if (time >= 1 && time <=14) {
-      objMainData.price = time * 1;
-      }
-    
-      if (time >= 15 && time <=60) {
-        objMainData.price = time * 0.95;
-      }
-    
-      if (time >= 61 && time <=180) {
-        objMainData.price = time * 0.9;
-      }
-    
-      if (time >= 181 && time <=365) {
-        objMainData.price = time * 0.85;
-      }
-  }
-  
-  else {
-    if (time >= 1 && time <=14) {
-      objMainData.price = time * 1;
-  }
+    if (document.getElementsByName('price')[0].checked) {
+      if (time >= 1 && time <=14) {
+        objMainData.price = time * 1;
+        }
+      
+        if (time >= 15 && time <=60) {
+          objMainData.price = time * 0.95;
+        }
+      
+        if (time >= 61 && time <=180) {
+          objMainData.price = time * 0.9;
+        }
+      
+        if (time >= 181 && time <=365) {
+          objMainData.price = time * 0.85;
+        }
+    }
 
-  if (time >= 15 && time <=60) {
-    objMainData.price = time * 0.95;
-  }
-
-  if (time >= 61 && time <=180) {
-    objMainData.price = time * 0.9;
-  }
-
-  if (time >= 181 && time <=365) {
-    objMainData.price = time * 0.85;
-  }
-  }
+    else {
+        if (time >= 1 && time <=14) {
+          objMainData.price = time * 1;
+        }
+      
+        if (time >= 15 && time <=60) {
+          objMainData.price = time * 0.95;
+        }
+      
+        if (time >= 61 && time <=180) {
+          objMainData.price = time * 0.9;
+        }
+      
+        if (time >= 181 && time <=365) {
+          objMainData.price = time * 0.85;
+        }
+    }
   }
   
     returnPrice();
